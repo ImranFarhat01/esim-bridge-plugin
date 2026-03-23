@@ -1,0 +1,37 @@
+{
+"name": "eSim Simulation Bridge",
+"description": "One-click simulation bridge between KiCad (8/9) and eSim 2.5",
+"description_full": "Adds a single toolbar button in KiCad PCB Editor that automatically exports your schematic netlist, converts it to SPICE format, generates .cir and .cir.out files with ngspice control block, sets up the eSim project, and launches eSim with simulation ready to run. Supports Transient, AC, DC Sweep, and Operating Point analysis. Eliminates 7+ manual steps in the KiCad-to-eSim simulation workflow and enables seamless integration between KiCad and eSim.",
+
+"identifier": "com.fossee.esim-bridge",
+
+"author": {
+    "name": "Imran Farhat (FOSSEE Intern, IIT Bombay)",
+    "contact": {
+        "email": "imranfarhat.official@gmail.com",
+        "organization": "contact-esim@fossee.in"
+    }
+},
+
+"license": "GPL-3.0",
+
+"resources": {
+    "homepage": "https://esim.fossee.in"
+},
+
+"versions": [
+    {
+        "version": "1.0.0",
+        "status": "stable",
+        "kicad_version": "8.0",
+        "kicad_version_max": "9.99",
+        "platforms": ["linux"],
+        
+        "download_sha256": "",
+        "download_url": "",
+        "download_size": 0,
+        "install_size": 51200
+    }
+]
+
+}
