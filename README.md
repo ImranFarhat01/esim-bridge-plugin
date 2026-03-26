@@ -24,7 +24,7 @@ Eliminates the manual workflow of exporting netlists, converting to SPICE, and s
 6. Exports voltage and current data (`plot_data_v.txt`, `plot_data_i.txt`)
 7. Runs Operating Point analysis internally using ngspice (no eSim launch needed)
 
-**Reduces the 26-step manual process to 4 steps in 30 seconds.**
+**Reduces the 10-15-step manual process to 4 steps in 30 seconds.**
 
 ---
 
