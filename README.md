@@ -6,7 +6,7 @@
 
 A KiCad 8.0 / 9.0 plugin that bridges KiCad schematics directly to eSim 2.5 simulation with a single click.
 
-**Developed for:** FOSSEE Semester Long Internship Spring 2026 — Task 6: KiCad Plugin Development  
+**Developed for:** FOSSEE Semester Long Internship Spring 2026 - Task 6: KiCad Plugin Development  
 **Author:** Imran Farhat  
 **Institution:** IIT Bombay (FOSSEE)
 
@@ -43,21 +43,21 @@ Eliminates the manual workflow of exporting netlists, converting to SPICE, and s
 
 | Environment | Status |
 |---|---|
-| Ubuntu 24.04 in VirtualBox (Windows host) | ✅ Fully tested — recommended |
+| Ubuntu 24.04 in VirtualBox (Windows host) | ✅ Fully tested - recommended |
 | Native Ubuntu 24.04 Linux | ✅ Works perfectly |
-| WSL 2 with WSLg (Windows 11) | ⚠️ May work — see WSL section below |
-| WSL 1 or WSL without WSLg | ❌ Will not work — no display support |
-| macOS | ❌ Not supported — eSim 2.5 is Linux only |
+| WSL 2 with WSLg (Windows 11) | ⚠️ May work - see WSL section below |
+| WSL 1 or WSL without WSLg | ❌ Will not work - no display support |
+| macOS | ❌ Not supported - eSim 2.5 is Linux only |
 
-> **⚠️ WSL Warning:** This plugin requires KiCad GUI, eSim GUI, and ngspice — all graphical applications. WSL without WSLg display support will not work. VirtualBox Ubuntu is the fully tested and recommended environment.
+> **⚠️ WSL Warning:** This plugin requires KiCad GUI, eSim GUI, and ngspice - all graphical applications. WSL without WSLg display support will not work. VirtualBox Ubuntu is the fully tested and recommended environment.
 
 ---
 
 ## Installation
 
-### Option A — VirtualBox Ubuntu (Recommended)
+### Option A - VirtualBox Ubuntu (Recommended)
 
-#### Step 1 — Set up VirtualBox
+#### Step 1 - Set up VirtualBox
 
 - Download VirtualBox from https://virtualbox.org
 - Download Ubuntu 24.04 LTS ISO from https://ubuntu.com/download/desktop
@@ -71,7 +71,7 @@ Eliminates the manual workflow of exporting netlists, converting to SPICE, and s
 | Video Memory | 256 MB |
 | 3D Acceleration | Enabled |
 
-#### Step 2 — Install KiCad 8.0
+#### Step 2 - Install KiCad 8.0
 
 ```bash
 sudo apt update
@@ -79,7 +79,7 @@ sudo apt install -y kicad
 kicad-cli --version   # Should show: Application: kicad-cli 8.0.x
 ```
 
-#### Step 3 — Install eSim 2.5
+#### Step 3 - Install eSim 2.5
 
 ```bash
 cd ~/Downloads
@@ -95,7 +95,7 @@ ls ~/Downloads/eSim-2.5/src/frontEnd/Application.py
 ls ~/.esim/env/bin/python3
 ```
 
-#### Step 4 — Install the plugin
+#### Step 4 - Install the plugin
 
 ```bash
 cd ~
@@ -106,18 +106,18 @@ cp -r ~/esim-bridge-plugin/esim_bridge ~/.local/share/kicad/8.0/scripting/plugin
 ls -la ~/.local/share/kicad/8.0/scripting/plugins/esim_bridge/
 ```
 
-#### Step 5 — Fix your username ⚠️ MANDATORY
+#### Step 5 - Fix your username ⚠️ MANDATORY
 
 The plugin has hardcoded paths with the developer's username `imran-farhat`. Replace with yours:
 
 ```bash
 sed -i "s/imran-farhat/$(whoami)/g" ~/.local/share/kicad/8.0/scripting/plugins/esim_bridge/esim_bridge.py
 
-# Verify — must return NO output
+# Verify - must return NO output
 grep "imran-farhat" ~/.local/share/kicad/8.0/scripting/plugins/esim_bridge/esim_bridge.py
 ```
 
-#### Step 6 — Fix `__init__.py` and create workspace
+#### Step 6 - Fix `__init__.py` and create workspace
 
 ```bash
 # Fix __init__.py
@@ -128,14 +128,14 @@ mkdir -p ~/eSim-Workspace
 echo '{"/home/'$(whoami)'/eSim-Workspace/esim_bridge_project": []}' > ~/eSim-Workspace/.projectExplorer.txt
 ```
 
-#### Step 7 — Restart KiCad and verify
+#### Step 7 - Restart KiCad and verify
 
 Open KiCad → PCB Editor → look for the eSim Bridge icon in the toolbar.  
 If not visible: **Tools → External Plugins → Refresh Plugins**
 
 ---
 
-### Option B — WSL Ubuntu (Windows Subsystem for Linux)
+### Option B - WSL Ubuntu (Windows Subsystem for Linux)
 
 KiCad and system ngspice conflict on Ubuntu 24.04 in WSL. Follow these steps in exact order:
 
@@ -162,7 +162,7 @@ Then verify KiCad GUI actually opens:
 
 ```bash
 kicad
-# A KiCad window must appear — if you see display errors, use VirtualBox instead
+# A KiCad window must appear - if you see display errors, use VirtualBox instead
 ```
 
 Then follow Steps 3–7 from the VirtualBox section above (identical steps).
@@ -245,7 +245,7 @@ Sim.Params: dc=0 ampl=1 f=1k ac=1
 | D | Diode / LED | `D1 anode cathode dled` (generic model auto-injected) |
 | Q | BJT Transistor | `Q1 c b e model` |
 | M | MOSFET | `M1 d g s b model` |
-| U/X | Digital IC | Commented out — needs external `.subckt` model |
+| U/X | Digital IC | Commented out - needs external `.subckt` model |
 
 ---
 
@@ -322,7 +322,7 @@ PYTHONPATH=/home/$(whoami)/Downloads/eSim-2.5/src ~/.esim/env/bin/python3 Applic
 | No schematic found | No project open in KiCad | Open a KiCad project before clicking the plugin |
 | eSim opens with blank icons | Wrong VirtualBox display | Set VM display to VMSVGA + 256 MB video memory |
 | Please select project first | No project selected in eSim | Double-click `esim_bridge_project` in eSim left panel |
-| UTF-8 popup after simulate | Stale `.raw` binary file | Dismiss popup and click Simulate again — benign cosmetic issue |
+| UTF-8 popup after simulate | Stale `.raw` binary file | Dismiss popup and click Simulate again - benign cosmetic issue |
 | Flat graph at 0V | No voltage source in circuit | Add VSIN source with `Sim.Type=SIN` and `Sim.Params` set |
 | KiCad display error in WSL | WSLg not supported | Use VirtualBox instead |
 
@@ -330,7 +330,7 @@ PYTHONPATH=/home/$(whoami)/Downloads/eSim-2.5/src ~/.esim/env/bin/python3 Applic
 
 ## Known Limitations
 
-1. **OP analysis — no graph:** eSim 2.5 cannot plot `.op` results graphically. Node voltages are shown in a message box instead.
+1. **OP analysis - no graph:** eSim 2.5 cannot plot `.op` results graphically. Node voltages are shown in a message box instead.
 
 2. **UTF-8 popup (cosmetic):** A known cosmetic issue in eSim 2.5 causes a UTF-8 error popup when the plotter encounters a binary `.raw` file. This is an eSim-internal behavior, not a plugin defect. The simulation completes successfully. Dismiss the popup and proceed to plot.
 
@@ -355,7 +355,7 @@ PYTHONPATH=/home/$(whoami)/Downloads/eSim-2.5/src ~/.esim/env/bin/python3 Applic
     "version": "1.0.0",
     "kicad_version": "8.0",
     "license": "GPL-3.0",
-    "author": "Imran Farhat — FOSSEE Intern @ IIT Bombay",
+    "author": "Imran Farhat - FOSSEE Intern @ IIT Bombay",
     "email": "imranfarhat.official@gmail.com",
     "fossee_contact": "contact-esim@fossee.in"
 }
@@ -365,4 +365,4 @@ PYTHONPATH=/home/$(whoami)/Downloads/eSim-2.5/src ~/.esim/env/bin/python3 Applic
 
 ## License
 
-GPL-3.0 — Free to use, modify, and distribute with attribution.
+GPL-3.0 - Free to use, modify, and distribute with attribution.
